@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music Player</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <!-- div1 -->
+      <div class="div1">
+        <div class="icon">
+          <img src="src/icons/dropdown.png" alt="dropdown" />
+        </div>
+        <p>Music Player</p>
+        <div class="icon">
+          <img src="src/icons/Settings.png" alt="settings" />
+        </div>
+      </div>
+      <!-- div2 -->
+      <div class="div2">
+        <div class="cover">
+          <img src="/src/images/Song Cover Art 1.png" alt="Cover" />
+        </div>
+        <p class="title">Apna Banale Piya</p>
+        <p class="singer">Arijit Singh</p>
+        <input type="range" min="0" max="100" value="20" />
+      </div>
+      <!-- div3 -->
+      <div class="div3">
+        <p>0:30</p>
+        <p>2:00</p>
+      </div>
+      <!-- div4 -->
+      <div class="div4">
+        <div class="shuffle btn">
+          <img src="src/icons/Shuffle.png" alt="shuffle" />
+        </div>
+        <div class="prev btn">
+          <img src="src/icons/Skip Back.png" alt="prev" />
+        </div>
+        <div class="play btn"><img src="src/icons/Play.png" alt="play" /></div>
+        <div class="next btn">
+          <img src="src/icons/Skip Fwd.png" alt="next" />
+        </div>
+        <div class="repeat btn">
+          <img src="src/icons/Repeat.png" alt="repeat" />
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

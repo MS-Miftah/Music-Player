@@ -1,0 +1,140 @@
+// BISMILLAH
+
+// ---Variables---
+// font-weight
+$bold: 700;
+$semibold: 600;
+$medium: 500;
+$regular: 400;
+
+// ---Mixins---
+@mixin row() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin mpZero() {
+  margin: 0;
+  padding: 0;
+}
+@mixin button() {
+  height: 44px;
+  width: 44px;
+  border-radius: 50%;
+  background: #96969625;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// ---Main code---
+body {
+  background: #121212;
+  height: 100vh;
+  color: #f0f0f0;
+  font-family: "poppins", "verdana";
+  @include row();
+
+  /* Main Container */
+  .container {
+    height: 90vh;
+    width: 450px;
+    background: black;
+    border-radius: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding-bottom: 20px;
+
+    .div1 {
+      display: flex;
+      justify-content: space-around;
+
+      .icon {
+        display: flex;
+        align-items: center;
+      }
+      p {
+        font-weight: $bold;
+        font-size: 18px;
+      }
+    }
+    .div2 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      img {
+        height: 250px;
+      }
+      .title {
+        font-weight: $bold;
+        font-size: 26px;
+        color: #e5e5e5;
+        @include mpZero();
+      }
+      .singer {
+        font-weight: $semibold;
+        font-size: 16px;
+        color: #bcbcbc;
+        @include mpZero();
+        padding-bottom: 30px;
+      }
+      input {
+        -webkit-appearance: none;
+        height: 4px;
+        width: 340px;
+        border-radius: 25px;
+        background: linear-gradient(90deg, #52d7bf 20%, #5e5a5a 20%);
+        cursor: pointer;
+        @include mpZero();
+      }
+      input::-webkit-slider-thumb {
+        appearance: none;
+        height: 14px;
+        width: 14px;
+        border-radius: 50%;
+        background: #fff;
+      }
+      input::-webkit-slider-thumb:hover {
+        background: #ccc;
+      }
+      input::-webkit-slider-thumb:active {
+        transform: scale(1.2);
+      }
+    }
+    .div3 {
+      display: flex;
+      justify-content: space-between;
+      margin: -10px 55px;
+      p {
+        font-weight: $medium;
+        font-size: 14px;
+      }
+    }
+    .div4 {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      .btn img {
+        height: 24px;
+      }
+      .shuffle,
+      .repeat {
+        @include button();
+        background: black;
+      }
+      .prev,
+      .next {
+        @include button();
+      }
+      .play {
+        @include button();
+        background: black;
+        border-radius: 50%;
+        border: 2px solid;
+        height: 70px;
+        width: 70px;
+      }
+    }
+  }
+}
