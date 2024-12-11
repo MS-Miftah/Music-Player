@@ -31,28 +31,38 @@
         </div>
         <p class="title">Apna Banale Piya</p>
         <p class="singer">Arijit Singh</p>
-        <input type="range" min="0" max="100" value="20" />
+        <input
+          class="seekbar"
+          type="range"
+          min="0"
+          max="100"
+          value="0"
+          step="0.1"
+        />
       </div>
       <!-- div3 -->
       <div class="div3">
-        <p>0:30</p>
-        <p>2:00</p>
+        <p class="start">00:00</p>
+        <p class="end">00:00</p>
       </div>
       <!-- div4 -->
       <div class="div4">
-        <div class="shuffle btn">
+        <audio src="/src/music/Apna Banale Piya.mp3"></audio>
+        <button class="shuffle btn">
           <img src="src/icons/Shuffle.png" alt="shuffle" />
-        </div>
-        <div class="prev btn">
+        </button>
+        <button class="prev btn">
           <img src="src/icons/Skip Back.png" alt="prev" />
-        </div>
-        <div class="play btn"><img src="src/icons/Play.png" alt="play" /></div>
-        <div class="next btn">
+        </button>
+        <button class="play btn">
+          <img src="src/icons/Play.png" alt="play" />
+        </button>
+        <button class="next btn">
           <img src="src/icons/Skip Fwd.png" alt="next" />
-        </div>
-        <div class="repeat btn">
+        </button>
+        <button class="repeat btn">
           <img src="src/icons/Repeat.png" alt="repeat" />
-        </div>
+        </button>
       </div>
     </div>
     <script src="script.js"></script>

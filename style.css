@@ -9,8 +9,8 @@ body {
   /* Main Container */
 }
 body .container {
-  height: 90vh;
-  width: 450px;
+  height: 550px;
+  width: 400px;
   background: black;
   border-radius: 40px;
   display: flex;
@@ -58,7 +58,7 @@ body .container .div2 input {
   height: 4px;
   width: 340px;
   border-radius: 25px;
-  background: linear-gradient(90deg, #52d7bf 20%, #5e5a5a 20%);
+  background: linear-gradient(90deg, #52d7bf 0%, #5e5a5a 0%);
   cursor: pointer;
   margin: 0;
   padding: 0;
@@ -79,7 +79,7 @@ body .container .div2 input::-webkit-slider-thumb:active {
 body .container .div3 {
   display: flex;
   justify-content: space-between;
-  margin: -10px 55px;
+  margin: -10px 30px;
 }
 body .container .div3 p {
   font-weight: 500;
@@ -97,6 +97,7 @@ body .container .div4 .shuffle,
 body .container .div4 .repeat {
   height: 44px;
   width: 44px;
+  border: none;
   border-radius: 50%;
   background: rgba(150, 150, 150, 0.1450980392);
   display: flex;
@@ -108,6 +109,7 @@ body .container .div4 .prev,
 body .container .div4 .next {
   height: 44px;
   width: 44px;
+  border: none;
   border-radius: 50%;
   background: rgba(150, 150, 150, 0.1450980392);
   display: flex;
@@ -117,14 +119,15 @@ body .container .div4 .next {
 body .container .div4 .play {
   height: 44px;
   width: 44px;
+  border: none;
   border-radius: 50%;
   background: rgba(150, 150, 150, 0.1450980392);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: black;
+  background: #000;
   border-radius: 50%;
-  border: 2px solid;
+  border: solid 2px white;
   height: 70px;
   width: 70px;
 }
