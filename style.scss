@@ -26,6 +26,31 @@ $regular: 400;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+}
+@mixin range($w: 340px, $played: 0%, $nplayed: 0%) {
+  input {
+    -webkit-appearance: none;
+    height: 4px;
+    width: $w;
+    border-radius: 25px;
+    background: linear-gradient(90deg, #52d7bf $played, #5e5a5a $nplayed);
+    cursor: pointer;
+    margin: 10px 0;
+  }
+  input::-webkit-slider-thumb {
+    appearance: none;
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    background: #fff;
+  }
+  input::-webkit-slider-thumb:hover {
+    background: #ccc;
+  }
+  input::-webkit-slider-thumb:active {
+    transform: scale(1.2);
+  }
 }
 
 // ---Main code---
@@ -35,10 +60,24 @@ body {
   color: #f0f0f0;
   font-family: "poppins", "verdana";
   @include row();
+  gap: 0;
+  // volume
+  .volumebar {
+    transform: rotate(270deg);
+    width: 200px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+    border-radius: 50px;
+    visibility: hidden;
 
+    @include range($w: 150px, $played: 1%, $nplayed: 1%);
+  }
   /* Main Container */
   .container {
-    height: 550px;
+    height: 600px;
     width: 400px;
     background: black;
     border-radius: 40px;
@@ -50,10 +89,11 @@ body {
     .div1 {
       display: flex;
       justify-content: space-around;
+      align-items: center;
 
       .icon {
-        display: flex;
-        align-items: center;
+        @include button();
+        background: #000;
       }
       p {
         font-weight: $bold;
@@ -78,30 +118,24 @@ body {
         font-size: 16px;
         color: #bcbcbc;
         @include mpZero();
-        padding-bottom: 30px;
       }
-      input {
-        -webkit-appearance: none;
-        height: 4px;
-        width: 340px;
-        border-radius: 25px;
-        background: linear-gradient(90deg, #52d7bf 0%, #5e5a5a 0%);
-        cursor: pointer;
-        @include mpZero();
+      .extra {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+        width: 88%;
+
+        .volume img,
+        .love img {
+          height: 24px;
+        }
+        .volume,
+        .love {
+          @include button();
+        }
       }
-      input::-webkit-slider-thumb {
-        appearance: none;
-        height: 14px;
-        width: 14px;
-        border-radius: 50%;
-        background: #fff;
-      }
-      input::-webkit-slider-thumb:hover {
-        background: #ccc;
-      }
-      input::-webkit-slider-thumb:active {
-        transform: scale(1.2);
-      }
+      @include range();
     }
     .div3 {
       display: flex;
@@ -116,6 +150,7 @@ body {
       display: flex;
       justify-content: space-around;
       align-items: center;
+
       .btn img {
         height: 24px;
       }

@@ -23,10 +23,15 @@ audio.addEventListener("timeupdate", () => {
 
 audio.addEventListener("timeupdate", () => {
   const startTime = document.querySelector(".start");
+  const duration = audio.duration;
   const playingTime = audio.currentTime;
   let timeLength = timeFormat(playingTime);
 
-  startTime.textContent = timeLength;
+  if (playingTime != duration) {
+    startTime.textContent = timeLength;
+  } else {
+    startTime.textContent = "00:00";
+  }
 });
 
 function timeFormat(time) {
@@ -35,6 +40,16 @@ function timeFormat(time) {
 
   return `${min < 10 ? "0" : ""}${min}:${sec < 10 ? "0" : ""}${sec}`;
 }
+
+// repeat
+const repeatBtn = document.querySelector(".repeat");
+let repeat = true;
+
+repeatBtn.addEventListener("click", () => {
+  repeat === false ? (repeat = true) : (repeat = false);
+  console.log(repeat);
+});
+console.log(repeat);
 
 // Progressive seekbar
 const seekbar = document.querySelector(".seekbar");
@@ -50,6 +65,11 @@ audio.addEventListener("timeupdate", () => {
   } else {
     seekbar.style.background = `linear-gradient(90deg, #52d7bf 0%, #5e5a5a 0%)`;
     seekbar.value = `0`;
+    if ((repeat = true)) {
+      nextSong();
+    } else {
+      audio.pause();
+    }
   }
 });
 
@@ -61,3 +81,103 @@ seekbar.addEventListener("input", () => {
 
   seekbar.style.background = `linear-gradient(90deg, #52d7bf ${seekbar.value}%, #5e5a5a ${seekbar.value}%)`;
 });
+
+// favourite
+let favourite = false;
+
+document.querySelector(".love").addEventListener("click", () => {
+  let icon = document.querySelector(".love img");
+  if (favourite === false) {
+    favourite = true;
+    icon.src = "/src/icons/heart.png";
+  } else {
+    favourite = false;
+    icon.src = "/src/icons/heart.svg";
+  }
+});
+
+// volume button
+const volBtn = document.querySelector(".volume");
+const volBar = document.querySelector(".volumebar");
+const volRange = document.querySelector(".volrange");
+
+volBtn.addEventListener("click", () => {
+  volBar.style.visibility = "visible";
+
+  setTimeout(() => {
+    volBar.style.visibility = "hidden";
+  }, 5000);
+});
+
+// volume up down
+volRange.value = 10;
+let volume = volRange.value / 100;
+audio.volume = volume;
+console.log(volume);
+
+volRange.addEventListener("input", () => {
+  if (volume > 0.1) {
+    volRange.style.background = `linear-gradient(90deg, #52d7bf ${volRange.value}%, #5e5a5a ${volRange.value}%)`;
+    volRange.value = `${volRange.value}`;
+  } else {
+    volRange.style.background = `linear-gradient(90deg, #52d7bf 1%, #5e5a5a 1%)`;
+    volRange.value = `1`;
+  }
+});
+
+// Change songs
+const next = document.querySelector(".next");
+
+const songs = [
+  ["/src/music/Apna Banale Piya.mp3", "Apna Banale Piya", "Arijit Singh"],
+  ["/src/music/Tu Jane Na.mp3", "Tu Jane Na", "Atif Aslam"],
+  ["/src/music/Mere Mehboob.mp3", "Mere Mehboob", "Sanam"],
+];
+audio.pause();
+
+let currentSong = 0;
+
+audio.src = songs[currentSong][0];
+// audio.load();
+// console.log(audio.src);
+
+next.addEventListener("click", () => {
+  nextSong();
+});
+
+function nextSong() {
+  const title = document.querySelector(".title");
+  const singer = document.querySelector(".singer");
+
+  currentSong = (currentSong + 1) % songs.length;
+
+  audio.src = songs[currentSong][0];
+  audio.load();
+  audio.play();
+  title.textContent = songs[currentSong][1];
+  singer.textContent = songs[currentSong][2];
+  playPause.src = "/src/icons/Pause.png";
+}
+nextSong();
+
+// previous song
+const prev = document.querySelector(".prev");
+
+prev.addEventListener("click", () => {
+  prevSong();
+});
+
+function prevSong() {
+  const title = document.querySelector(".title");
+  const singer = document.querySelector(".singer");
+
+  currentSong = (currentSong - 1 + songs.length) % songs.length;
+
+  audio.src = songs[currentSong][0];
+  audio.load();
+  audio.play();
+  title.textContent = songs[currentSong][1];
+  singer.textContent = songs[currentSong][2];
+  playPause.src = "/src/icons/Pause.png";
+}
+prevSong();

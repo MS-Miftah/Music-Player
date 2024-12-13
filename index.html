@@ -13,6 +13,16 @@
     />
   </head>
   <body>
+    <div class="volumebar">
+      <input
+        type="range"
+        class="volrange"
+        min="0"
+        max="100"
+        step="1"
+        value="1"
+      />
+    </div>
     <div class="container">
       <!-- div1 -->
       <div class="div1">
@@ -31,6 +41,14 @@
         </div>
         <p class="title">Apna Banale Piya</p>
         <p class="singer">Arijit Singh</p>
+        <div class="extra">
+          <button class="volume">
+            <img src="/src/icons/Volume Up.png" alt="volume" />
+          </button>
+          <button class="love">
+            <img src="/src/icons/heart.svg" alt="love" />
+          </button>
+        </div>
         <input
           class="seekbar"
           type="range"
