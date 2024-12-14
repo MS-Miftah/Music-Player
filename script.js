@@ -15,6 +15,8 @@ document.querySelector(".play").addEventListener("click", () => {
 
 // Starting and ending time
 audio.addEventListener("timeupdate", () => {
+  if (!audio.duration) return;
+
   const endTime = document.querySelector(".end");
   const duration = audio.duration;
   let timeLength = timeFormat(duration);
@@ -46,15 +48,16 @@ const repeatBtn = document.querySelector(".repeat");
 let repeat = true;
 
 repeatBtn.addEventListener("click", () => {
-  repeat === false ? (repeat = true) : (repeat = false);
-  console.log(repeat);
+  repeat = !repeat;
+  repeatBtn.style.backgroundColor = repeat ? "" : "black";
 });
-console.log(repeat);
 
 // Progressive seekbar
 const seekbar = document.querySelector(".seekbar");
 
 audio.addEventListener("timeupdate", () => {
+  if (!audio.duration) return;
+
   const running = audio.currentTime;
   const duration = audio.duration;
   let progress = ((running / duration) * 100).toFixed(2);
@@ -65,7 +68,7 @@ audio.addEventListener("timeupdate", () => {
   } else {
     seekbar.style.background = `linear-gradient(90deg, #52d7bf 0%, #5e5a5a 0%)`;
     seekbar.value = `0`;
-    if ((repeat = true)) {
+    if (repeat) {
       nextSong();
     } else {
       audio.pause();
@@ -102,6 +105,8 @@ const volBar = document.querySelector(".volumebar");
 const volRange = document.querySelector(".volrange");
 
 volBtn.addEventListener("click", () => {
+  let container = document.querySelector(".container");
+  console.log(container);
   volBar.style.visibility = "visible";
 
   setTimeout(() => {
@@ -110,36 +115,42 @@ volBtn.addEventListener("click", () => {
 });
 
 // volume up down
-volRange.value = 10;
-let volume = volRange.value / 100;
-audio.volume = volume;
-console.log(volume);
-
 volRange.addEventListener("input", () => {
-  if (volume > 0.1) {
-    volRange.style.background = `linear-gradient(90deg, #52d7bf ${volRange.value}%, #5e5a5a ${volRange.value}%)`;
-    volRange.value = `${volRange.value}`;
-  } else {
-    volRange.style.background = `linear-gradient(90deg, #52d7bf 1%, #5e5a5a 1%)`;
-    volRange.value = `1`;
-  }
+  let volume = volRange.value / 100;
+  audio.volume = volume;
+
+  volRange.style.background = `linear-gradient(90deg, #52d7bf ${volRange.value}%, #5e5a5a ${volRange.value}%)`;
 });
 
 // Change songs
 const next = document.querySelector(".next");
 
 const songs = [
-  ["/src/music/Apna Banale Piya.mp3", "Apna Banale Piya", "Arijit Singh"],
-  ["/src/music/Tu Jane Na.mp3", "Tu Jane Na", "Atif Aslam"],
-  ["/src/music/Mere Mehboob.mp3", "Mere Mehboob", "Sanam"],
+  {
+    src: "/src/music/Apna Banale Piya.mp3",
+    title: "Apna Banale Piya",
+    artist: "Arijit Singh",
+    cover: "src/images/banale.jpeg",
+  },
+  {
+    src: "/src/music/Tu Jane Na.mp3",
+    title: "Tu Jane Na",
+    artist: "Atif Aslam",
+    cover: "src/images/janena.jpeg",
+  },
+  {
+    src: "/src/music/Mere Mehboob.mp3",
+    title: "Mere Mehboob",
+    artist: "Sanam",
+    cover: "src/images/mehboob.jpeg",
+  },
 ];
 audio.pause();
 
 let currentSong = 0;
 
-audio.src = songs[currentSong][0];
-// audio.load();
-// console.log(audio.src);
+audio.src = songs[currentSong].src;
+audio.load();
 
 next.addEventListener("click", () => {
   nextSong();
@@ -148,15 +159,17 @@ next.addEventListener("click", () => {
 function nextSong() {
   const title = document.querySelector(".title");
   const singer = document.querySelector(".singer");
+  const cover = document.querySelector(".cover img");
 
   currentSong = (currentSong + 1) % songs.length;
 
-  audio.src = songs[currentSong][0];
+  audio.src = songs[currentSong].src;
   audio.load();
   audio.play();
-  title.textContent = songs[currentSong][1];
-  singer.textContent = songs[currentSong][2];
+  title.textContent = songs[currentSong].title;
+  singer.textContent = songs[currentSong].artist;
   playPause.src = "/src/icons/Pause.png";
+  cover.src = songs[currentSong].cover;
 }
 nextSong();
 
@@ -170,14 +183,31 @@ prev.addEventListener("click", () => {
 function prevSong() {
   const title = document.querySelector(".title");
   const singer = document.querySelector(".singer");
+  const cover = document.querySelector(".cover img");
 
   currentSong = (currentSong - 1 + songs.length) % songs.length;
 
-  audio.src = songs[currentSong][0];
+  audio.src = songs[currentSong].src;
   audio.load();
   audio.play();
-  title.textContent = songs[currentSong][1];
-  singer.textContent = songs[currentSong][2];
+  title.textContent = songs[currentSong].title;
+  singer.textContent = songs[currentSong].artist;
   playPause.src = "/src/icons/Pause.png";
+  cover.src = songs[currentSong].cover;
 }
 prevSong();
+
+// shuflle
+let shuffle = false;
+
+document.querySelector(".shuffle").addEventListener("click", () => {
+  shuffle = !shuffle;
+  // Toggle shuffle button style
+});
+
+function getNextSongIndex() {
+  if (shuffle) {
+    return Math.floor(Math.random() * songs.length);
+  }
+  return (currentSong + 1) % songs.length;
+}
